@@ -33,7 +33,7 @@ add_compile_options(-Wall -Wextra)
 # add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 
 #Uncomment for software floating point
-#add_compile_options(-mfloat-abi=soft)
+add_compile_options(-mfloat-abi=soft)
 
 add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
