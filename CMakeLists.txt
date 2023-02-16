@@ -103,6 +103,8 @@ add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 
 target_link_options(${PROJECT_NAME}.elf PRIVATE -T ${LINKER_SCRIPT})
 
+target_link_libraries(${PROJECT_NAME}.elf FreeRTOS)
+
 target_include_directories(${PROJECT_NAME}.elf PUBLIC "lib/SeggerRTT/RTT" "lib/SeggerRTT/Config")
 
 # For Bootloader's NVIC
