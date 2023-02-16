@@ -53,9 +53,31 @@ file(GLOB COMMON_SOURCES_SINGLE
         "lib/drivers/src/at32f421_gpio.c"
         "lib/cmsis/cm4/device_support/startup/gcc/startup_at32f421.s"
         )
+# https://www.freertos.org/FreeRTOS_Support_Forum_Archive/March_2018/freertos_FreeRTOS_port_for_ARM_M4_no_FPU_no_MPU_25989e7cj.html
+# at32f421 has no fpu, If you have a Cortex-M4 without a floating point unit, or a Cortex-M3, then use the port files in FreeRTOS/source/portable/[compiler]/ARM_CM3
+add_library(FreeRTOS STATIC
+        lib/freertos/source/event_groups.c
+        lib/freertos/source/list.c
+        lib/freertos/source/queue.c
+        lib/freertos/source/stream_buffer.c
+        lib/freertos/source/tasks.c
+        lib/freertos/source/timers.c
+        lib/freertos/source/portable/GCC/ARM_CM3/port.c
+        lib/freertos/source/portable/memmang/heap_4.c)
+
+target_include_directories(FreeRTOS PUBLIC
+        lib/freertos/config
+        lib/freertos/source/portable/GCC/ARM_CM3
+        lib/freertos/source/include)
+
 
 include_directories(
-        lib/cmsis/cm4/core_support lib/cmsis/cm4/device_support lib/core lib/drivers/inc
+        lib/cmsis/cm4/core_support 
+        lib/cmsis/cm4/device_support 
+        lib/core 
+        lib/drivers/inc
+        lib/freertos/source/include
+        lib/freertos/config
 )
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
